@@ -21,11 +21,6 @@ Python client for [Couchbase](https://couchbase.com)
   binary wheel is available for your platform. Currently, wheels are only available on Windows for Python 3.7, 3.8 and 3.9. We will endeavor to add more.
 - Git, if a binary wheel is not available.
 
->**NOTE:** Currently the Python Client source distribution requires the OpenSSL headers and libraries that the Python client itself was built against to be installed prior to the client itself for TLS support to be provided. Additionally the installer relies on PEP517 which older versions of PIP do not support. If you experience issues installing it is advised to upgrade your PIP/setuptools installation as follows:<br>
->```console
->python3 -m pip install --upgrade pip setuptools wheel
->```
-
 ## Debian and Ubuntu<a id="pre-deb-ubuntu"></a>
 
 First-time setup:
@@ -37,6 +32,8 @@ For TLS/SSL support:
 ```console
 $ sudo apt install libssl-dev
 ```
+
+See [Debian and Ubuntu](#install-deb-ubuntu) install section to install SDK.
 
 ## RHEL and CentOS<a id="pre-rhel-centos"></a>
 
@@ -51,6 +48,8 @@ For TLS/SSL support:
 ```console
 $ sudo yum install openssl-devel
 ```
+
+See [RHEL and Centos](#install-rhel-centos) install section to install SDK.
 
 ## Mac OS X<a id="pre-macos"></a>
 
@@ -95,20 +94,30 @@ For TLS/SSL support:
 $ brew install openssl
 ```
 
+See [Mac OS X](#install-macos) install section to install SDK.
+
 ## Windows<a id="pre-windows"></a>
 
 Wheels are available on Windows for Python 3.7, 3.8 and 3.9.
 >**NOTE:** Python 3.9 wheel was released with v 3.1.2 of the SDK  
 
-If wanting to install from source, see the [Windows](#building-windows) details in the [Building](#building) section.
+If wanting to install from source, see the [Windows](#building-windows) building section for details.
+
+See [Windows](#install-windows) install section to install SDK.
 
 # Installing<a id="installing"></a>
+[Back to Contents](#contents)
 
 You can always get the latest supported release version from [pypi](https://pypi.org/project/couchbase/).
 
 >**NOTE:** If you have a recent version of *pip*, you may use the latest development version by issuing the following incantation:
 >```console
 >pip install git+git://github.com/couchbase/couchbase-python-client
+>```
+
+>**NOTE:** Currently the Python Client source distribution requires the OpenSSL headers and libraries that the Python client itself was built against to be installed prior to the client itself for TLS support to be provided. Additionally the installer relies on PEP517 which older versions of PIP do not support. If you experience issues installing it is advised to upgrade your PIP/setuptools installation as follows:<br>
+>```console
+>python3 -m pip install --upgrade pip setuptools wheel
 >```
 
 
@@ -151,7 +160,7 @@ python -m pip install couchbase
 
 ### Alternative Installation Methods<a id="install-windows-alt"></a>
 
-In order to successfully install with the following methods, ensure a proper build system is in place (see the [Windows](#building-windows) information in Building section for details).
+In order to successfully install with the following methods, ensure a proper build system is in place (see the [Windows](#building-windows) building section for details).
 
 #### Source Install (i.e. no wheel)
 
@@ -181,32 +190,40 @@ Install the SDK from source:
 python -m pip install -e .
 ```
 
-## Anaconda<a id="install-anaconda"></a>
+## Anaconda/Miniconda<a id="install-anaconda"></a>
 
-To use the SDK within the Anaconda platform, make sure the prerequisites for the desired Operating System are met:
+To use the SDK within the Anaconda/Miniconda platform, make sure the prerequisites for the desired Operating System are met:
 - [Debian and Ubuntu](#pre-deb-ubuntu)
 - [RHEL and Centos](#pre-rhel-centos)
 - [Mac OS X](#pre-macos)
 - [Windows](#pre-windows)
 
-In the conda console, create a new environment:
+In the *Anaconda Prompt*, create a new environment:
 ```console
+(base) C:\Users\user1>conda create -n test_env python=3.9
+```
+
+Activate the environment
+```console
+(base) C:\Users\user1>conda activate test_env
 ```
 
 Install the SDK:
 ```console
+(test_env) C:\Users\user1>python -m pip install couchbase
 ```
 
->**NOTE:** If using Windows, and no wheel is available, see the [Alternative Install Methods Windows](#install-windows-alt) section under [Installing](#installing).
+>**NOTE:** If using Windows, and no wheel is available, see the [Alternative Install Methods Windows](#install-windows-alt) section.  The same process should work within the Anaconda/Miniconda platform.
 
 # Building<a id="building"></a>
+[Back to Contents](#contents)
 
 >**NOTE:** This section only applies to building from source (i.e. not using a wheel).
 
 ## Build System Setup
 ### Linux<a id="building-linux"></a>
 
-Make sure the have been installed:
+Make sure the prerequisites have been installed:
 - [Debian and Ubuntu](#pre-deb-ubuntu)
 - [RHEL and Centos](#pre-rhel-centos)
 
@@ -232,16 +249,16 @@ $ python -m pip install setuptools
 
 ### Windows<a id="building-windows"></a>
 #### Requirements
-- Download and install [CMake](https://cmake.org/download/) >= v 3.5.1
 - Download and install [Git](https://git-scm.com/downloads)
 - Download and install [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/)
     + Check *Desktop development with C++* prior to installing
+- Download and install [CMake](https://cmake.org/download/) >= v 3.5.1
 - Download and install [Python](https://www.python.org/downloads/)
 
 #### VS2019 Notes
 
 If seeing issues when trying to build (steps in [](#)), some things to check/try:
-- Try running the build commands within the visual studio developer command line
+- Try running the build commands within the *Developer Command Prompt for VS2019*
 - Make sure *MSBuild* can find the correct *VCTargetsPath*
     + It is possible the *VCTargetsPath* environment variable needs to be set.  The below example is based on a typical path, but the actual setting should match that of your current environment setup.
         * ```set VCTargetsPath=C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160```
@@ -299,6 +316,7 @@ pip install .
 >:exclamation:**WARNING:** If you are on Mac OS X you may need to remove the build directory: ```rm -rf ./build``` before installing with pip: ```pip3 install .```.
 
 # Using the SDK<a id="using-the-sdk"></a>
+[Back to Contents](#contents)
 
 ## Connecting<a id="sdk-connecting"></a>
 
@@ -423,6 +441,7 @@ reactor.run()
 
 ```
 # Building Documentation<a id="building-documentation"></a>
+[Back to Contents](#contents)
 
 The documentation is using Sphinx and also needs the numpydoc Sphinx extension. In order for the documentation to build properly, the C extension must have been built, since there are embedded docstrings in there as well.
 
@@ -440,6 +459,7 @@ python setup.py build_sphinx
 Once built, the docs will be in in build/sphinx/html.
 
 # Testing<a id="testing"></a>
+[Back to Contents](#contents)
 
 For running the tests, you need the standard unittest module, shipped with Python. Additionally, the testresources package is required.
 
@@ -453,20 +473,25 @@ nosetests
 ```
 
 # Contributing<a id="contributing"></a>
+[Back to Contents](#contents)
 
-We welcome contributions from the community!  Please see follow the steps outlined [here](https://github.com/thejcfactor/couchbase-python-readme/blob/main/CONTRIBUTING.md) to get started.
+We welcome contributions from the community!  Please see follow the steps outlined [here](https://github.com/couchbase/couchbase-python-client/blob/master/CONTRIBUTING.md) to get started.
 
 # License
+[Back to Contents](#contents)
 
 The Couchbase Python SDK is licensed under the Apache License 2.0.
 
 # Support & Additional Resources<a id="support-additional-resources"></a>
+[Back to Contents](#contents)
 
 If you found an issue, please file it in our [JIRA](http://couchbase.com/issues/browse/pycbc). You can ask questions in our [forums](https://forums.couchbase.com/).
 
 The [official documentation](https://docs.couchbase.com/python-sdk/current/hello-world/start-using-sdk.html) can be consulted as well for general Couchbase concepts and offers a more didactic approach to using the SDK.
 
 # Appendix<a id="appendix"></a>
+[Back to Contents](#contents)
+
 ### Mac OS X pyenv Install<a id="appendix-pyenv"></a>
 See pyenv install [docs](https://github.com/pyenv/pyenv#homebrew-on-macos) for further details.
 

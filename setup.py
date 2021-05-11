@@ -5,7 +5,7 @@ curdir = pathlib.Path(__file__).parent
 
 setup(
     name="couchbase-python-readme",
-    version="0.1.0",
+    version="0.1.1",
     description="Validate the Couchbase Python SDK README",
     long_description=open(str(curdir.joinpath("README.md")), "r").read(),
     long_description_content_type="text/markdown",
