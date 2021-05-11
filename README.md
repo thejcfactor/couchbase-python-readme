@@ -360,12 +360,13 @@ cb = cluster.bucket('travel-sample')
 cb_coll = cb.default_collection()
 
 # get a document
-result = cb_coll.get('airline_8091')
+result = cb_coll.get('airline_10')
 print(result.content_as[dict])
 
 # using SQL++ (a.k.a N1QL)
+call_sign = 'CBS'
 sql_query = 'SELECT VALUE name FROM `travel-sample` WHERE type = "airline" AND callsign = $1'
-row_iter = cluster.query(sql_query, QueryOptions(positional_parameters=[cs]))
+row_iter = cluster.query(sql_query, QueryOptions(positional_parameters=[call_sign]))
 for row in row_iter: 
     print(row)
 ```
@@ -380,8 +381,6 @@ The Python Couchbase SDK supports asynchronous I/O through the use of the asynci
 To use asyncio, import ```acouchbase.cluster``` instead of ```couchbase.cluster```.  The ```acouchbase``` API offers an API similar to the ```couchbase``` API.
 
 ```python
-import asyncio
-
 from acouchbase.cluster import Cluster, get_event_loop
 from couchbase.cluster import ClusterOptions
 from couchbase.auth import PasswordAuthenticator
@@ -391,8 +390,8 @@ async def write_and_read(key, value):
     cluster = Cluster(
         connection_string='couchbase://localhost',
         options=ClusterOptions(
-        authenticator=PasswordAuthenticator("Administrator","password")))
-    cb = cluster.bucket("test")
+        authenticator=PasswordAuthenticator('Administrator','password')))
+    cb = cluster.bucket('test')
     await cb.on_connect()
     cb_coll = cb.default_collection()
     await cb_coll.upsert(key, value)
@@ -414,7 +413,7 @@ from couchbase.auth import PasswordAuthenticator
 
 
 def after_upsert(res, key, d):
-    print("Set key.  Result CAS: ", res.cas)
+    print('Set key.  Result CAS: ', res.cas)
     # trigger get_document callback
     d.callback(key)
 
@@ -425,7 +424,7 @@ def upsert_document(key, doc):
     return d
 
 def on_get(res, _type=str):
-    print("Got res: \n", res.content_as[_type])
+    print('Got res: \n', res.content_as[_type])
     reactor.stop()
 
 def get_document(key):
@@ -438,16 +437,14 @@ cluster = TxCluster(connection_string='couchbase://localhost',
                     authenticator=PasswordAuthenticator('Administrator', 'password'))
 
 # create a bucket object
-bucket = cluster.bucket('beer-sample')
+bucket = cluster.bucket('default')
 # create a collection object
 cb = bucket.default_collection()
 
-key = 'testDoc_1'
-d = cb.upsert(key, {'id': 1, 'type': 'testDoc', 'info': 'fake document'})
-d.addCallback(get_document, key)
+d = upsert_document('testDoc_1', {'id': 1, 'type': 'testDoc', 'info': 'fake document'})
+d.addCallback(get_document)
 
 reactor.run()
-
 ```
 # Building Documentation<a id="building-documentation"></a>
 [Back to Contents](#contents)
