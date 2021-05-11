@@ -51,11 +51,11 @@ $ sudo yum install openssl-devel
 
 See [RHEL and Centos](#install-rhel-centos) install section to install SDK.
 
-## Mac OS X<a id="pre-macos"></a>
+## Mac OS<a id="pre-macos"></a>
 
 It is not recommended to use the vendor-supplied Python that ships with OS X. Best practice is to use a Python virtual environment such as pyenv or venv (after another version of Python that is not vendor-supplied has been installed) to manage multiple versions of Python.
 
->:exclamation:**IMPORTANT**:exclamation:<br>There can be a problem when using the Python (3.8.2) that ships with Xcode on Catalina.  It is advised to use one of the following:
+>:exclamation:**IMPORTANT**:exclamation:<br>There can be a problem when using the Python (3.8.2) that ships with Xcode on Catalina.    It is advised to install Python with one of the following:
 >- [pyenv](#macos-pyenv)
 >- [Homebrew](#macos-homebrew)
 >- Install Python via [python.org](https://www.python.org/downloads)
@@ -94,7 +94,7 @@ For TLS/SSL support:
 $ brew install openssl
 ```
 
-See [Mac OS X](#install-macos) install section to install SDK.
+See [Mac OS](#install-macos) install section to install SDK.
 
 ## Windows<a id="pre-windows"></a>
 
@@ -103,9 +103,9 @@ Wheels are available on Windows for Python 3.7, 3.8 and 3.9.
 
 Best practice is to use a Python virtual environment such as venv or pyenv (checkout the [pyenv-win](https://github.com/pyenv-win/pyenv-win) project) to manage multiple versions of Python.
 
-If wanting to install from source, see the [Windows](#building-windows) building section for details.
+If wanting to install from source, see the [Windows building](#building-windows) section for details.
 
-See [Windows](#install-windows) install section to install SDK.
+See [Windows install](#install-windows) section to install SDK.
 
 # Installing<a id="installing"></a>
 [Back to Contents](#contents)
@@ -141,7 +141,7 @@ Install the SDK:
 $ python3 -m pip install couchbase
 ```
 
-## Mac OS X<a id="install-macos"></a>
+## Mac OS<a id="install-macos"></a>
 
 First, make sure the [prerequisites](#pre-macos) have been installed.
 
@@ -166,7 +166,7 @@ python -m pip install couchbase
 
 ### Alternative Installation Methods<a id="install-windows-alt"></a>
 
-In order to successfully install with the following methods, ensure a proper build system is in place (see the [Windows](#building-windows) building section for details).
+In order to successfully install with the following methods, ensure a proper build system is in place (see the [Windows building](#building-windows) section for details).
 
 #### Source Install (i.e. no wheel)
 
@@ -186,7 +186,7 @@ Clone this Python SDK repository:
 git clone --depth 1 --branch <tag_name> https://github.com/couchbase/couchbase-python-client.git
 ```
 
->**NOTE:** Where tag_name is equal to the latest release.<br>
+>Where tag_name is equal to the latest release.<br>
 Example: ```git clone --depth 1 --branch 3.1.2 https://github.com/couchbase/couchbase-python-client.git```
 
 Move into the directory created after cloning the Python SDK repository:
@@ -204,7 +204,7 @@ python -m pip install .
 To use the SDK within the Anaconda/Miniconda platform, make sure the prerequisites for the desired Operating System are met:
 - [Debian and Ubuntu](#pre-deb-ubuntu)
 - [RHEL and Centos](#pre-rhel-centos)
-- [Mac OS X](#pre-macos)
+- [Mac OS](#pre-macos)
 - [Windows](#pre-windows)
 
 In the *Anaconda Prompt*, create a new environment:
@@ -227,7 +227,7 @@ Install the SDK:
 # Building<a id="building"></a>
 [Back to Contents](#contents)
 
->**NOTE:** This section only applies to building from source (i.e. not using a wheel).
+>**NOTE:** This section only applies to building from source.
 
 ## Build System Setup
 ### Linux<a id="building-linux"></a>
@@ -236,7 +236,7 @@ Make sure the prerequisites have been installed:
 - [Debian and Ubuntu](#pre-deb-ubuntu)
 - [RHEL and Centos](#pre-rhel-centos)
 
-### Mac OS X<a id="building-macos"></a>
+### Mac OS<a id="building-macos"></a>
 First, make sure the [prerequisites](#pre-macos) have been installed.
 
 Install cmake:
@@ -322,7 +322,7 @@ You can also modify the environment ```CFLAGS``` and ```LDFLAGS``` variables.
 pip install .
 ```
 
->:exclamation:**WARNING:** If you are on Mac OS X you may need to remove the build directory: ```rm -rf ./build``` before installing with pip: ```pip3 install .```.
+>:exclamation:**WARNING:** If you are on Linux/Mac OS you may need to remove the build directory: ```rm -rf ./build``` before installing with pip: ```pip3 install .```.
 
 # Using the SDK<a id="using-the-sdk"></a>
 [Back to Contents](#contents)
@@ -501,7 +501,7 @@ The [official documentation](https://docs.couchbase.com/python-sdk/current/hello
 # Appendix<a id="appendix"></a>
 [Back to Contents](#contents)
 
-### Mac OS X pyenv Install<a id="appendix-pyenv"></a>
+### Mac OS pyenv Install<a id="appendix-pyenv"></a>
 See pyenv install [docs](https://github.com/pyenv/pyenv#homebrew-on-macos) for further details.
 
 Get the latest packages:
