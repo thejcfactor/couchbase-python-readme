@@ -101,6 +101,8 @@ See [Mac OS X](#install-macos) install section to install SDK.
 Wheels are available on Windows for Python 3.7, 3.8 and 3.9.
 >**NOTE:** Python 3.9 wheel was released with v 3.1.2 of the SDK  
 
+Best practice is to use a Python virtual environment such as venv or pyenv (checkout the [pyenv-win](https://github.com/pyenv-win/pyenv-win) project) to manage multiple versions of Python.
+
 If wanting to install from source, see the [Windows](#building-windows) building section for details.
 
 See [Windows](#install-windows) install section to install SDK.
@@ -153,6 +155,10 @@ $ python -m pip install couchbase
 
 First, make sure the [prerequisites](#pre-windows) have been installed.
 
+>**NOTE:** Commands assume user is working within a virtual environment.  For example, the following commands have been executed after downloading and installing Python from [python.org](https://www.python.org/downloads/):<br>
+>-```C:\Users\Administrator\AppData\Local\Programs\Python\Python39\python -m venv C:\python\python39```<br>
+>-```C:\python\python39\Scripts\activate```
+
 Install the SDK (if using Python 3.7, 3.8 or 3.9):
 ```console
 python -m pip install couchbase
@@ -177,8 +183,11 @@ First, ensure all the [requirements](#building-windows) for a build system are m
 
 Clone this Python SDK repository:
 ```console
-git clone https://github.com/couchbase/couchbase-python-client.git
+git clone --depth 1 --branch <tag_name> https://github.com/couchbase/couchbase-python-client.git
 ```
+
+>**NOTE:** Where tag_name is equal to the latest release.<br>
+Example: ```git clone --depth 1 --branch 3.1.2 https://github.com/couchbase/couchbase-python-client.git```
 
 Move into the directory created after cloning the Python SDK repository:
 ```console
@@ -187,7 +196,7 @@ cd couchbase-python-client
 
 Install the SDK from source:
 ```console
-python -m pip install -e .
+python -m pip install .
 ```
 
 ## Anaconda/Miniconda<a id="install-anaconda"></a>
